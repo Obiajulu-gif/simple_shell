@@ -8,8 +8,8 @@
  * Return: returns an integer, 0- success, -1 failure
  */
 
-int main(int ac __attribute__((unused)), char **av,
-	 char **env __attribute__((unused)))
+int main(int ac , char **av,
+		 char **env __attribute__((unused)))
 {
 	while (1)
 	{
@@ -28,9 +28,10 @@ int main(int ac __attribute__((unused)), char **av,
 		if (read > 1)
 		{
 			line[read - 1] = '\0';
-			execCommand(line, av);
+			execCommand(line, av, ac);
 		}
 		free(line);
+		handle_command_with_args(av, ac);
 	}
 	return (0);
 }
@@ -40,32 +41,53 @@ int main(int ac __attribute__((unused)), char **av,
  * @line: the input
  * @av: the argument vector
  */
-void execCommand(char *line, char **av)
+void execCommand(char *line, char **av, int ac)
 {
-	if (access(line, X_OK) == 0)
+	char *token;
+	char **args = (char **)malloc(MAX_ARGS * sizeof(char *));
+	int i = 0;
+	int j = 0;
+
+	if (args == NULL)
 	{
-		char **args = (char **)malloc(2 * sizeof(char *));
+		perror("Memory Allocation error");
+		exit(1);
+	}
 
-		if (args == NULL)
+	token = strtok(line, " \t\n");
+	while (token != NULL)
+	{
+		args[i] = token;
+		i++;
+		token = strtok(NULL, " \t\n");
+	}
+	args[i] = NULL;
+
+	if (access(args[0], X_OK) == 0)
+	{
+		if (fork() == 0)
 		{
-			perror("Memory Allocation error");
-			exit(1);
-		}
-
-		args[0] = line;
-		args[1] = NULL;
-
-		if  (fork() == 0)
-		{
-			execve(line, args, NULL);
+			execve(args[0], args, NULL);
 			perror("Execution error");
 			exit(1);
 		}
 		else
 			wait(NULL);
-
-		free(args);
 	}
 	else
-		_printf("%s: No such file or directory\n", av[0]);
+	{
+		for (j = 0; args[j] != NULL; j++)
+		{
+			if (access(args[0], X_OK) == 0)
+			{
+				printf("%s ", line);
+			}
+			else
+			{
+				_printf("%s: No such file or directory\n", av[0]);
+			}
+		}
+	}
+
+	free(args);
 }

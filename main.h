@@ -10,8 +10,12 @@
 #include <errno.h>
 #include <stdarg.h>
 
-void execCommand(char *line, char **av);
 int _putchar(char c);
+
+#define MAX_LINE 80
+#define MAX_ARGS 100
+
+/* Printf function  */
 int _printf(const char *format, ...);
 void print_unknown_specifier(char specifier, size_t *count);
 void print_null_or_str(char *s, size_t *count);
@@ -29,4 +33,8 @@ void handle_str(char *s, size_t *count);
 void handle_char(char c, size_t *count);
 void handle_int(unsigned int num, size_t *count);
 
+/* Shell Function */
+void handle_command_with_args(char **args, int num_args);
+void execCommand(char *line, char **av, int ac);
+char **split_line(char *line);
 #endif
