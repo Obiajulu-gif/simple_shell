@@ -1,8 +1,9 @@
 #include "main.h"
 
 void handle_command_with_args(char **args,
-int num_args __attribute__((unused)))
+int num_args)
 {
+int i;
 if (access(args[0], X_OK) == 0)
 {
 if (fork() == 0)
@@ -16,7 +17,14 @@ wait(NULL);
 }
 else
 {
-perror("Error");
+_printf("%s\n", args[0]);
+if (num_args > 1)
+{
+for (i = 1; i < num_args; i++)
+{
+_printf("%s ", args[i]);
+}
+_printf("\n");
 }
 }
-
+}
