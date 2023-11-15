@@ -35,6 +35,6 @@ void handle_int(unsigned int num, size_t *count);
 
 /* Shell Function */
 void handle_command_with_args(char **args, int num_args);
-void execCommand(char *line, char **av, int ac);
+void execCommand(char *line, char **av);
 char **split_line(char *line);
 #endif

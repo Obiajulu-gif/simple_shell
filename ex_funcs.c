@@ -26,6 +26,7 @@ void handle_bin(unsigned int num, size_t *count)
 {
 	print_binary(num, count);
 }
+
 /**
  * handle_unsign - entry point
  * @num: the number
@@ -35,6 +36,7 @@ void handle_unsign(unsigned int num, size_t *count)
 {
 	print_unsigned(num, count);
 }
+
 /**
  * handle_octal - entry point
  * @num: the num
