@@ -24,6 +24,7 @@ void execute_command(char *command_line, char *shell_name)
 	}
 	if (_strcmp(command_line, "exit") == 0)
 	{
+		/*extern char **environ;*/
 		char **env = environ;
 
 		while (*env != NULL)
