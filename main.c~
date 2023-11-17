@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char *line;
+
+    while ((line = custom_getline()) != NULL) {
+        // Print the line read from the user
+        printf("You entered: %s\n", line);
+
+        // Check if the line is empty (user pressed Enter without typing anything)
+        if (line[0] == '\0') {
+            printf("Exiting...\n");
+            break;
+        }
+    }
+
+    return 0;
+}
