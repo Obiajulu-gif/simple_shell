@@ -17,6 +17,8 @@ void display_prompt(void);
 int _strcmp(char *s1, char *s2);
 extern char **environ;
 char *_getline();
+char *_strtok(char *str, const char *delim);
+
 /* Printf function  */
 int _printf(const char *format, ...);
 void print_unknown_specifier(char specifier, size_t *count);

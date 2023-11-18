@@ -26,3 +26,40 @@ int _strcmp(char *s1, char *s2)
 	else
 		return (0);
 }
+
+/**
+ * _strtok - Entry point
+ * @str: the string to be tokenized
+ * @delim: the delimiter
+ * Return: a char
+ */
+char *_strtok(char *str, const char *delim)
+{
+	static char *nextToken;
+	char *tokenStart;
+	char *tokenEnd;
+
+	if (str != NULL)
+	{
+		nextToken = str;
+	}
+	else if (nextToken == NULL)
+	{
+		return (NULL);
+	}
+
+	tokenStart = nextToken;
+	tokenEnd = strpbrk(nextToken, delim);
+
+	if (tokenEnd != NULL)
+	{
+		*tokenEnd = '\0';
+		nextToken = tokenEnd + 1;
+	}
+	else
+	{
+		nextToken = NULL;
+	}
+
+	return (tokenStart);
+}

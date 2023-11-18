@@ -43,12 +43,12 @@ void execute_command(char *command_line, char *shell_name)
 	{
 		char *args[MAX_ARGS];
 		int i = 0;
-		char *token = strtok(command_line, " ");
+		char *token = _strtok(command_line, " ");
 
 		while (token != NULL && i < MAX_ARGS - 1)
 		{
 			args[i++] = token;
-			token = strtok(NULL, " ");
+			token = _strtok(NULL, " ");
 		}
 		args[i] = NULL;
 		execvp(args[0], args);
