@@ -10,7 +10,9 @@
 
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS 10
+
 /* Shell Function */
+char *_strpbrk(char *s, const char *accept);
 int _putchar(char c);
 void execute_command(char *command_line, char *shell_name);
 void display_prompt(void);
