@@ -1,4 +1,6 @@
 #include "main.h"
+
+
 /**
  * display_prompt - entry point
  */
@@ -56,29 +58,30 @@ void execute_command(char *command_line, char *shell_name)
 	else
 		waitpid(pid, NULL, 0);
 }
+
 /**
  * main - entry point
  * @argc: argument count
- * @argv: argumenr vector
+ * @argv: argument vector
  * Return: an integer 0 or 1
  */
 int main(int argc __attribute__((unused)), char **argv)
 {
-	char command[MAX_COMMAND_LENGTH];
+	char *command = NULL;
 
 	while (1)
 	{
 		display_prompt();
 
-		if (fgets(command, sizeof(command), stdin) == NULL)
+		command = _getline();
+		if (command == NULL)
 		{
 			_printf("\nExiting shell.\n");
 			break;
 		}
 
-		command[strcspn(command, "\n")] = '\0';
-
 		execute_command(command, argv[0]);
 	}
+
 	return (0);
 }

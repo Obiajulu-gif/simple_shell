@@ -10,12 +10,13 @@
 
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS 10
-
+/* Shell Function */
 int _putchar(char c);
 void execute_command(char *command_line, char *shell_name);
 void display_prompt(void);
 int _strcmp(char *s1, char *s2);
 extern char **environ;
+char *_getline();
 /* Printf function  */
 int _printf(const char *format, ...);
 void print_unknown_specifier(char specifier, size_t *count);
